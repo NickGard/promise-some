@@ -1,0 +1,26 @@
+{
+  "name": "@ngard/promise-some",
+  "version": "1.0.0",
+  "description": "The complementary function to Promise.all()",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "mocha src/",
+    "test:watch": "mocha src/ --watch",
+    "build": "uglifyjs --compress --mangle --output index.js -- src/index.js"
+  },
+  "keywords": [
+    "Promise",
+    "all",
+    "some",
+    "async",
+    "asynchronous"
+  ],
+  "author": "Nick Gard",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "mocha": "^5.2.0",
+    "uglify-es": "^3.3.9"
+  }
+}
