@@ -1,5 +1,5 @@
-Object.defineProperty(exports, '__esModule', {
-  value: true,
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
 exports.some = some;
 
@@ -18,7 +18,7 @@ function some(iterable) {
     return Promise.resolve(nonPromise);
   }
 
-  function accumulateRejection(index) {
+  function accumulateRejection(reject, index) {
     return function(reason) {
       // rejection reasons should be in the same order as the promises that generated them
       reasons[index] = reason;
@@ -26,12 +26,14 @@ function some(iterable) {
         // reject if all promises rejected
         reject(reasons);
       }
-    }
+    };
   }
-  
-  return new Promise(function (resolve) {
-    Promise.race(promises.map(function (promise, i) {
-      return promise.then(resolve, accumulateRejection(i))
-    }));
+
+  return new Promise(function(resolve, reject) {
+    Promise.race(
+      promises.map(function(promise, i) {
+        return promise.then(resolve, accumulateRejection(reject, i));
+      })
+    );
   });
-};
+}
